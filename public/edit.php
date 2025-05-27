@@ -35,18 +35,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title>EDIT Student</title>
     <link rel="stylesheet" href="../index.css"> 
 </head>
-<body>
-    <h1>Edit Student</h1>
-    <form method="POST" action="">
-        <label for="column">Select Filed</label>
-        <select name="column" id="field">
+<body class="bg-gray-300 h-full w-full">
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+<div class="bg-blue-500 p-7">
+<h1 class="text-5xl font-bold">Edit Student</h1>
+</div>
+<div class="flex justify-center items-center h-full w-full pt-10">
+    <form method="POST" action="" class="w-[30%] bg-white shadow-lg p-6 rounded-t-xl space-y-3">
+        <div class="w-full h-full">
+        <label class="text-xl font-semibold" for="column">Select Filed</label>
+        <select name="column" id="field" class='w-40 border rounded-lg py-1 pl-2 border-gray-300'">
             <option value="First_Name">First_Name</option>
             <option value="Last_Name">Last_Name</option>
             <option value="age">Age</option>
         </select>
+        </div>
+        
         <input type="text" name="value"  id="">
         <button type="submit">Edit Student</button>
+        <a href="./index.php">Back to Student List</a>
     </form>
-    <a href="./index.php">Back to Student List</a>
+    
+    </div>
 </body>
 </html>

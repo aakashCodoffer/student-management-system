@@ -25,20 +25,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title>Add Student</title>
     <link rel="stylesheet" href="../index.css"> 
 </head>
-<body>
-    <h1>Add New Student</h1>
-    <form method="POST" action="">
-        <label for="First_Name">First Name:</label>
-        <input type="text" id="First_Name" name="First_Name" required>
-        
-        <label for="Last_Name">Last Name:</label>
-        <input type="text" id="Last_Name" name="Last_Name" required>
-        
-        <label for="age">Age:</label>
-        <input type="number" id="age" name="age" required>
-        
-        <button type="submit">Add Student</button>
-    </form>
-    <a href="./index.php">Back to Student List</a>
+<body class="bg-gray-300 h-full w-full">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+                <div class="bg-blue-500 p-7">
+ 
+                        <h1 class="text-5xl font-bold">Add Student Value</h1>
+                    
+                </div>
+            <div class="flex justify-center items-center h-full w-full pt-10">
+                <form method="POST" action="" class="w-[30%] bg-white shadow-lg p-6 rounded-t-xl space-y-3">
+                    <div class="">
+                    <label class="text-xl font-semibold" for="First_Name">First Name:</label>
+                    <input class="border pl-3 rounded-lg py-1 w-full border-gray-300" type="text" id="First_Name" name="First_Name" required>
+                    </div>
+                    
+                    
+                    <label class="text-xl font-semibold" for="Last_Name">Last Name:</label>
+                    <input class="border pl-3 rounded-lg py-1 w-full border-gray-300" type="text" id="Last_Name" name="Last_Name" required>
+                    
+                    <label class="text-xl font-semibold" for="age">Age:</label>
+                    <input class="pl-3 border rounded-lg py-1 w-full border-gray-300" type="number" id="age" name="age" required>
+                    
+                    <button class="w-full bg-green-500 py-1 rounded-lg text-xl font-medium" type="submit">Submit</button>
+                    <a class="text-sm underline text-gray-700" href="./index.php">Back to Student List</a>
+                </form>
+                
+                </div>
+  
+    
 </body>
 </html>
