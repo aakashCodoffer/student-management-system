@@ -51,9 +51,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </select>
         </div>
         
-        <input type="text" name="value"  id="">
-        <button type="submit">Edit Student</button>
-        <a href="./index.php">Back to Student List</a>
+        <input class="border pl-3 rounded-lg py-1 w-full border-gray-300" type="text" name="value"  id="">
+        <button class="px-3 py-1.5 bg-green-500 rounded-sm" type="submit">Edit Student</button>
+        <a class="block ext-sm underline text-gray-700 text-center" href="./index.php">Back to Student List</a>
     </form>
     
     </div>

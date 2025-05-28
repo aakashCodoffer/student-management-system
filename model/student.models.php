@@ -32,9 +32,9 @@
             }
         }
 
-        public function addStudent($first_name,$last_name,$age){
+        public function addStudent($first_name,$last_name,$age,$profile){
             try {
-                $query = 'INSERT INTO students (First_Name, Last_Name, age) VALUES ("'.$first_name.'","'.$last_name.'","'.$age.'")';
+                $query = 'INSERT INTO students (first_name, last_name, age, profile) VALUES ("'.$first_name.'","'.$last_name.'","'.$age.'","'.$profile.'")';
                 $insertResult = $this->dbConnection->query($query);
                 if(!$insertResult){
                     throw new Exception("Error adding student: " . $this->dbConnection->error);

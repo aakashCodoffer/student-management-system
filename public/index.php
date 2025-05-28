@@ -11,7 +11,7 @@
     <main class="w-full h-screen bg-gray-300">
         <div class="bg-blue-500 p-7 flex justify-between items-center">
             <div class="  ">
-                <h1 class="text-5xl font-bold">Student Details System</h1>
+                <h1 class="text-5xl font-bold">Student Detail System</h1>
             </div>
             <div>
                 <a class="px-2.5 outline-none font-semibold  py-2 bg-white rounded-sm hover:bg-gray-300 hover:transition duration-300" href="./create.php" >Add Student</a>
@@ -28,22 +28,23 @@
                           echo "<table class='table-fixed w-[70%] shadow-lg  text-left '>";
                           echo "<thead class='font-semibold text-2xl bg-white rounded-2xl p-2'>
                 <tr>
-                <th class='p-5 rounded-tl-lg'>Id</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Age</th>
-                <th>Edit</th>
-                <th class='rounded-tr-lg'>Delete</th>
+                <th class='p-5 rounded-tl-lg'>id</th>
+                <th>profile</th>
+                <th>first name</th>
+                <th>last name</th>
+                <th>age</th>
+                <th>edit</th>
+                <th class='rounded-tr-lg'>delete</th>
                 </tr>
             </thead>";
         
             echo "<tbody>";
                           foreach ($getAllStudents as $student) {
-                          
                             echo "<tr class='p-2 shadow'>";
                             echo "<td class='font-medium p-4'>" . $student['id'] . "</td>";
-                            echo "<td>" . $student['First_Name'] . "</td>";
-                            echo "<td>" . $student['Last_Name'] . "</td>";
+                            echo "<td><img id='preview' class='w-12 mask-cover h-12 rounded-full ' src=".'../media/'.$student["profile"]."></td>";
+                            echo "<td>" . $student['first_name'] . "</td>";
+                            echo "<td>" . $student['last_name'] . "</td>";
                             echo "<td>" . $student['age'] . "</td>";
                             echo "<td><a class='px-3 py-1.5 bg-green-500 rounded-sm' href='./edit.php?id=" . $student['id'] . "'>Edit</a></td>";
                             echo "<td><a class=' px-3 py-1.5 bg-red-500 rounded-sm' href='./delete.php?id=" . $student['id'] . "'>Delete</a></td>";
@@ -58,12 +59,10 @@
         
                           ?>
                             
-                            <!-- <a href="./routes/edit.handler.php">Edit Student</a> -->
                           <?php
                    }
                  ?>
             </div>
-        
     </main>
 </body>
 </html>
