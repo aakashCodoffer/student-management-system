@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     echo $check[0];
         if($check !== false) {
             $fileName = uniqid("img_",true) . ".jpg";
-            $uploadedImage = move_uploaded_file($_FILES["photo"]["tmp_name"], "../media/".$fileName);
+            $uploadedImage = move_uploaded_file($_FILES["photo"]["tmp_name"], "./media/".$fileName);
                     echo "Your file uploaded successfully.";
                     echo "The file ". htmlspecialchars( basename( $_FILES["photo"]["name"])). " has been uploaded.";
         $uploadOk = 1;

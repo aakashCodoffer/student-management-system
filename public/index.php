@@ -42,7 +42,7 @@
                           foreach ($getAllStudents as $student) {
                             echo "<tr class='p-2 shadow'>";
                             echo "<td class='font-medium p-4'>" . $student['id'] . "</td>";
-                            echo "<td><img id='preview' class='w-12 mask-cover h-12 rounded-full ' src=".'../media/'.$student["profile"]."></td>";
+                            echo "<td><img id='preview' class='w-12 mask-cover h-12 rounded-full ' src=".'./media/'.$student["profile"]."></td>";
                             echo "<td>" . $student['first_name'] . "</td>";
                             echo "<td>" . $student['last_name'] . "</td>";
                             echo "<td>" . $student['age'] . "</td>";
