@@ -1,35 +1,33 @@
 <?php
+
+
 require "../model/student.models.php";
 $students = new Student();  
-
+$error = '';
+$imageError = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
-    //profile setup
-    $check = getimagesize($_FILES["photo"]["tmp_name"]);
-    echo $check[0];
-        if($check !== false) {
-            $fileName = uniqid("img_",true) . ".jpg";
-            $uploadedImage = move_uploaded_file($_FILES["photo"]["tmp_name"], "./media/".$fileName);
-                    echo "Your file uploaded successfully.";
-                    echo "The file ". htmlspecialchars( basename( $_FILES["photo"]["name"])). " has been uploaded.";
-        $uploadOk = 1;
-        } else {
-        echo "File is not an image.";
-        $uploadOk = 0;
-        }
-
-        //user details 
-        $firstName = $_POST['first_Name'] ?? '';
-        $lastName = $_POST['last_Name'] ?? '';
-        $age = $_POST['age'] ?? '';
-
-    if ($firstName && $lastName && $age) {
-        $students->addStudent($firstName, $lastName, $age,$fileName);
-        header("Location: ../index.php");
-        exit();
-    } else {
-        echo "All fields are required.";
+    if(empty($_POST['first_name']) && empty($_POST['last_name']) && empty($_POST['age']) || !$_FILES['photo']){
+        $error = "Required Filed Not Empty!";
+        $imageError = "Required Image File Not Here";
+    }else{
+        $firstName = $_POST['first_Name'];
+        $lastName = $_POST['last_Name'];
+        $age = $_POST['age'];
+        $profile = $_FILES['photo']['name'];
+            if(empty($profile)) {
+                $imageError = "Required Image File Not Here";
+                
+            } else {
+                $fileName = uniqid("img_",true) . ".jpg";
+                $uploadedImage = move_uploaded_file($_FILES["photo"]["tmp_name"], "./media/".$fileName);
+                if ($firstName && $lastName && $age) {
+                    $students->addStudent($firstName, $lastName, $age,$fileName);
+                    header("Location: ../index.php");
+                    exit();
+                } 
+            }
     }
+    
 }
 
 ?>
@@ -50,19 +48,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     
                 </div>
             <div class="flex justify-center items-center h-full w-full pt-10">
-                <form method="POST" enctype="multipart/form-data" action="" class="w-[30%] bg-white shadow-lg p-7 rounded-t-xl space-y-3">
-                    
+                <form method="POST" enctype="multipart/form-data" action="" autocomplete="off" class="w-[30%] bg-white shadow-lg p-7 rounded-t-xl space-y-3">
+                <p id='error' class='text-sm font-medium text-red-500'><?php echo $error ?></p>
                     <label class="text-xl font-semibold" for="First_Name">First Name:</label>
-                    <input  class="border pl-3 rounded-lg py-1 w-full border-gray-300" type="text" id="First_Name" name="first_Name" required>
+                    <input class="border pl-3 rounded-lg py-1 w-full border-gray-300" type="text" id="First_Name" name="first_Name">
                     
                     <label class="text-xl font-semibold" for="Last_Name">Last Name:</label>
-                    <input  class="border pl-3 rounded-lg py-1 w-full border-gray-300" type="text" id="Last_Name" name="last_Name" required>
+                    <input  class="border pl-3 rounded-lg py-1 w-full border-gray-300" type="text" id="Last_Name" name="last_Name">
                     
                     <label class="text-xl font-semibold" for="age">Age:</label>
-                    <input  class="pl-3 border rounded-lg py-1 w-full border-gray-300" type="number" id="age" name="age" required>
-
+                    <input  class="pl-3 border rounded-lg py-1 w-full border-gray-300" type="number" id="age" name="age">
+                    <p id='error' class='text-sm font-medium text-red-500'><?php echo $imageError ?></p>
                     <label class="text-xl font-semibold" for="image-uploading">Select Image</label>
-                    <input required class="border rounded-lg py-1 w-fit border-gray-300 pl-2" type="file" name="photo" id="image-uploading">
+                    <input class="border rounded-lg py-1 w-fit border-gray-300 pl-2" type="file" name="photo" id="image-uploading">
                     
                     <button class="w-full bg-green-500 cursor-pointer py-1 rounded-lg text-xl font-medium" type="submit">Submit</button>
                     <a class="text-sm underline text-gray-700" href="./index.php">Back to Student List</a>

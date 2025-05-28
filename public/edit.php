@@ -2,6 +2,7 @@
 require "../model/student.models.php";
 $students = new Student();
 $id = $_GET['id'] ?? null;
+$error = "";
 if ($id) {
     $studentDetails = $students->getStudentById($id);
     if (!$studentDetails) {
@@ -10,19 +11,17 @@ if ($id) {
     }
 } else {
     echo "No student ID provided.";
-    exit();
 }
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $columnValue = $_POST['column'] ?? '';
-    $newValue = $_POST['value'] ?? '';
-    
-
-    if ($columnValue && $newValue) {
-        $students->editStudentDetails($id,$columnValue,$newValue);
-        header("Location: ../index.php");
-        exit();
-    } else {
-        echo "All fields are required.";
+    if(empty($_POST['column']) && empty($_POST['value'])){
+        $error = 'Required Filed Are Empty !';
+    }
+    $columnValue = $_POST['column'];
+    $newValue = $_POST['value'];
+    if($columnValue && $newValue){
+        // $students->editStudentDetails($id,$columnValue,$newValue);
+        // header("Location: ../index.php");
+        // exit();
     }
 }
 ?>
@@ -43,6 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <div class="flex justify-center items-center h-full w-full pt-10">
     <form method="POST" action="" class="w-[30%] bg-white shadow-lg p-6 rounded-t-xl space-y-3">
         <div class="w-full h-full">
+        <p id='error' class='text-sm font-medium text-red-500'><?php echo $error ?></p>
         <label class="text-xl font-semibold" for="column">Select Filed</label>
         <select name="column" id="field" class='w-40 border rounded-lg py-1 pl-2 border-gray-300'">
             <option value="First_Name">First_Name</option>
