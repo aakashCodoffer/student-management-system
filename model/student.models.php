@@ -7,9 +7,10 @@
             $this->dbConnection = $db->connect();
         }
 
-        public function getAllStudents(){
+        public function getAllStudents($currentPage = 1,$limit = 2){
             try {
-                $query = "SELECT * FROM students";
+                $start = ($currentPage - 1) * $limit;
+                $query = "SELECT * FROM students LIMIT $start, $limit";
                 $fetchResult = $this->dbConnection->query($query);
                 if(!$fetchResult){
                     throw new Exception("Error fetching students: " . $this->dbConnection->error);

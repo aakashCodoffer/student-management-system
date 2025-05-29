@@ -17,7 +17,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if(empty($profile)) {
                 $imageError = "Required Image File Not Here";
                 
-            } else {
+            }
+            $fileType = pathinfo($profile,PATHINFO_EXTENSION);
+            if(!in_array($fileType,["jpg","png","jpeg"])){
+                $imageError = "Not Valid File Type Please Choose [.jpg, .jpeg, .png]";
+            } 
+            
+            else {
                 $fileName = uniqid("img_",true) . ".jpg";
                 $uploadedImage = move_uploaded_file($_FILES["photo"]["tmp_name"], "./media/".$fileName);
                 if ($firstName && $lastName && $age) {
@@ -60,7 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <input  class="pl-3 border rounded-lg py-1 w-full border-gray-300" type="number" id="age" name="age">
                     <p id='error' class='text-sm font-medium text-red-500'><?php echo $imageError ?></p>
                     <label class="text-xl font-semibold" for="image-uploading">Select Image</label>
-                    <input class="border rounded-lg py-1 w-fit border-gray-300 pl-2" type="file" name="photo" id="image-uploading">
+                    <input class="border rounded-lg py-1 w-fit border-gray-300 pl-2" type="file" name="photo" accept="image/png, image/jpeg, image/jpg" id="image-uploading">
                     
                     <button class="w-full bg-green-500 cursor-pointer py-1 rounded-lg text-xl font-medium" type="submit">Submit</button>
                     <a class="text-sm underline text-gray-700" href="./index.php">Back to Student List</a>
