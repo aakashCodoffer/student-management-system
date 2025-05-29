@@ -13,7 +13,7 @@
             <div class="  ">
                 <h1 class="text-5xl font-bold">Student Detail System</h1>
             </div>
-            <div>
+            <div class="space-x-2">
                 <a class="px-2.5 outline-none font-semibold  py-2 bg-white rounded-sm hover:bg-gray-300 hover:transition duration-300" href="./create.php" >Add Student</a>
             </div>
         </div>
