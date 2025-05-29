@@ -13,15 +13,15 @@ if ($id) {
     echo "No student ID provided.";
 }
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if(empty($_POST['column']) && empty($_POST['value'])){
+    if(empty($_POST['column']) || empty($_POST['value'])){
         $error = 'Required Filed Are Empty !';
     }
     $columnValue = $_POST['column'];
     $newValue = $_POST['value'];
     if($columnValue && $newValue){
-        // $students->editStudentDetails($id,$columnValue,$newValue);
-        // header("Location: ../index.php");
-        // exit();
+        $students->editStudentDetails($id,$columnValue,$newValue);
+        header("Location: ../index.php");
+        exit();
     }
 }
 ?>
