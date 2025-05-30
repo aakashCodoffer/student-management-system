@@ -106,7 +106,7 @@
             </a>";
 
             for($i = 1; $i <= $totalNumberOfPaginationBar; $i++){
-                if ($i <= 3 || $i == $pages) {
+                if ($i <= 5 || $i == $pages) {
                     $isSelected = ($pages === (int)$i);
                     $tagClass = $isSelected ? $selectedTag : $unSelectedTag;
 
