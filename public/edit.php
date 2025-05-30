@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $first_name = $_POST['first_name'];
     $last_name = $_POST['last_name'];
     $age = $_POST["age"];
-    $profile = $_POST["photo"];
+
     if($studentDetails['first_name'] !== $first_name){
         $students->editStudentDetails($id,"first_name",$first_name);
         header("Location: ../index.php");
@@ -31,10 +31,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         header("Location: ../index.php");
         exit();
     }else if($studentDetails['age'] !== $age){
-        $students->editStudentDetails($id,"age",$age);
-        header("Location: ../index.php");
-        exit();
-    }else if($studentDetails['profile'] !== $profile || isset($_POST['photo'])){
         $students->editStudentDetails($id,"age",$age);
         header("Location: ../index.php");
         exit();
@@ -74,10 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         
                         <label class='text-xl font-semibold' for='age'>Age:</label>
                         <input value=<?php echo $studentDetails['age'] ?> class='pl-3 border rounded-lg py-1 w-full border-gray-300' type='number' id='age' name='age'>
-
-                        <label class="text-xl font-semibold" for="image-uploading">Select Image: <?php echo $studentDetails['profile'] ?></label>
-                        <input  class="border mt-2 rounded-lg py-1 w-fit border-gray-300 pl-2" type="file" name="photo" accept="image/png, image/jpeg, image/jpg" id="image-uploading">
-            <button class="px-3 py-1.5 bg-green-500 rounded-sm" type="submit">Edit Student</button>
+            <button class="px-3 py-1.5 cursor-pointer bg-green-500 rounded-sm" type="submit">Edit Student</button>
             <a class="block text-sm underline text-gray-700 text-center" href="./index.php">Back to Student List</a>
         </form>
         
