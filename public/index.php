@@ -87,57 +87,74 @@
 
     <div class="flex space-x-1 justify-center pt-6 ">
     <?php 
-        $totalListOfStudent = (int)$getAllStudents[1][0][0];
-        $itemsPerPage = 10;
-        $totalField = $totalListOfStudent / $itemsPerPage;
-        $totalNumberOfPaginationBar = ceil($totalField); // Use ceil to round up
-        $selectedTag = "bg-slate-800 text-white";
-        $unSelectedTag = "text-black";
+$totalListOfStudent = (int)$getAllStudents[1][0][0];
+$itemsPerPage = 10;
+$totalField = $totalListOfStudent / $itemsPerPage;
+$totalNumberOfPaginationBar = ceil($totalField); // Total pages
+$selectedTag = "bg-slate-800 text-white";
+$unSelectedTag = "text-black";
 
-        $prev = max(1, $pages - 1);
-        $next_page = min($totalNumberOfPaginationBar, $pages + 1);
+$prev = max(1, $pages - 1);
+$next_page = min($totalNumberOfPaginationBar, $pages + 1);
 
-        if($totalNumberOfPaginationBar > 1){
-           
-            echo "<a href='index.php?page=$prev' 
-                class='min-w-9 rounded-md border border-slate-300 py-2 px-3 text-center text-sm transition-all shadow-sm ml-2 
-                ". ($pages <= 1 ? "disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none text-slate-400" : "hover:shadow-lg hover:text-white hover:bg-slate-800 hover:border-slate-800 text-slate-600") ."'>
-                Prev
-            </a>";
+function paginationLink($i, $pages, $selectedTag, $unSelectedTag) {
+    $isSelected = ($pages === (int)$i);
+    $tagClass = $isSelected ? $selectedTag : $unSelectedTag;
 
-            for($i = 1; $i <= $totalNumberOfPaginationBar; $i++){
-                if ($i <= 5 || $i == $pages) {
-                    $isSelected = ($pages === (int)$i);
-                    $tagClass = $isSelected ? $selectedTag : $unSelectedTag;
+    return "<a href='index.php?page=$i' 
+        class='min-w-9 rounded-md border border-slate-300 py-2 px-3 text-center text-sm transition-all shadow-sm ml-2 
+        hover:shadow-lg hover:text-white hover:bg-slate-800 hover:border-slate-800 
+        focus:text-white focus:bg-slate-800 focus:border-slate-800 
+        active:border-slate-800 active:text-white active:bg-slate-800 
+        disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none $tagClass'>
+        $i
+    </a>";
+}
 
-                    echo "<a href='index.php?page=$i' 
-                        class='min-w-9 rounded-md border border-slate-300 py-2 px-3 text-center text-sm transition-all shadow-sm ml-2 
-                        hover:shadow-lg hover:text-white hover:bg-slate-800 hover:border-slate-800 
-                        focus:text-white focus:bg-slate-800 focus:border-slate-800 
-                        active:border-slate-800 active:text-white active:bg-slate-800 
-                        disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none $tagClass'>
-                        $i
-                    </a>";
-                }
-            }
+if ($totalNumberOfPaginationBar > 1) {
 
-            if($pages < $totalNumberOfPaginationBar){
-                echo "<a href='index.php?page=$next_page' 
-                    class='min-w-9 rounded-md border border-slate-300 py-2 px-3 text-center text-sm transition-all shadow-sm ml-2 
-                    hover:shadow-lg hover:text-white hover:bg-slate-800 hover:border-slate-800 
-                    text-slate-600'>
-                    Next
-                </a>";
-            } else {
+    // Prev Button
+    echo "<a href='index.php?page=$prev' 
+        class='min-w-9 rounded-md border border-slate-300 py-2 px-3 text-center text-sm transition-all shadow-sm ml-2 
+        " . ($pages <= 1 ? "disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none text-slate-400" : "hover:shadow-lg hover:text-white hover:bg-slate-800 hover:border-slate-800 text-slate-600") . "'>
+        Prev
+    </a>";
 
-                echo "<a 
-                    class='min-w-9 rounded-md border border-slate-300 py-2 px-3 text-center text-sm transition-all shadow-sm ml-2 
-                    text-slate-400 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none'>
-                    Next
-                </a>";  
+    $dotsShown = false;
+
+    for ($i = 1; $i <= $totalNumberOfPaginationBar; $i++) {
+        if (
+            $i == 1 || // Always show first page
+            $i == $totalNumberOfPaginationBar || // Always show last page
+            abs($i - $pages) <= 1 // Current page, +1, -1
+        ) {
+            echo paginationLink($i, $pages, $selectedTag, $unSelectedTag);
+            $dotsShown = false;
+        } else {
+            if (!$dotsShown) {
+                echo "<span class='ml-2 text-slate-500 px-2'>...</span>";
+                $dotsShown = true;
             }
         }
-        ?>
+    }
+
+    // Next Button
+    if ($pages < $totalNumberOfPaginationBar) {
+        echo "<a href='index.php?page=$next_page' 
+            class='min-w-9 rounded-md border border-slate-300 py-2 px-3 text-center text-sm transition-all shadow-sm ml-2 
+            hover:shadow-lg hover:text-white hover:bg-slate-800 hover:border-slate-800 
+            text-slate-600'>
+            Next
+        </a>";
+    } else {
+        echo "<a 
+            class='min-w-9 rounded-md border border-slate-300 py-2 px-3 text-center text-sm transition-all shadow-sm ml-2 
+            text-slate-400 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none'>
+            Next
+        </a>";  
+    }
+}
+?>
 
     </div>
             
