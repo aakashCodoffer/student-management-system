@@ -1,5 +1,5 @@
 <?php
-    require_once        "../db/db.connection.php";
+    require_once "../db/db.connection.php";
     class Student {
         private $dbConnection; 
         public function __construct(){
@@ -15,7 +15,10 @@
                 if(!$fetchResult){
                     throw new Exception("Error fetching students: " . $this->dbConnection->error);
                 }
-                return $fetchResult->fetch_all(MYSQLI_ASSOC);
+                $list = "SELECT COUNT(*) FROM students";
+                $countStudentList = $this->dbConnection->query($list);
+                
+                return [$fetchResult->fetch_all(MYSQLI_ASSOC),$countStudentList->fetch_all()];
             } catch (\Throwable $th) {
                 throw $th;
             }

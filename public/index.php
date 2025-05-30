@@ -10,7 +10,6 @@
      $next_page = $pages + 1;
 ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -63,8 +62,8 @@
                 </tr>
             </thead>";
         
-            echo "<tbody>";
-                          foreach ($getAllStudents as $student) {
+            echo "<tbody>"; 
+                          foreach ($getAllStudents[0] as $student) {
                             echo "<tr class='p-2 shadow'>";
                             echo "<td class='font-medium p-4'>" . $student['id'] . "</td>";
                             echo "<td><img id='preview' class='w-12 mask-cover h-12 rounded-full ' src=".'./media/'.$student["profile"]."></td>";
@@ -87,21 +86,21 @@
 
 
     <div class="flex space-x-1 justify-center pt-6 ">
-        <a href="index.php?page=<?php echo ($pages >= 0) ? $pages = 1 : $pages - 1 ?>" class="rounded-md border border-slate-300 py-2 px-3 text-center text-sm transition-all shadow-sm hover:shadow-lg text-slate-600 hover:text-white hover:bg-slate-800 hover:border-slate-800 focus:text-white focus:bg-slate-800 focus:border-slate-800 active:border-slate-800 active:text-white active:bg-slate-800 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none ml-2">
-            Prev
-        </a>
-        <a href="index.php?page=<?php echo $pages = 1?>" class="min-w-9 rounded-md bg-slate-800 py-2 px-3 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none ml-2">
-            1
-        </a>
-        <a href="index.php?page=<?php echo $pages = 2?>" class="min-w-9 rounded-md border border-slate-300 py-2 px-3 text-center text-sm transition-all shadow-sm hover:shadow-lg text-slate-600 hover:text-white hover:bg-slate-800 hover:border-slate-800 focus:text-white focus:bg-slate-800 focus:border-slate-800 active:border-slate-800 active:text-white active:bg-slate-800 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none ml-2">
-            2
-        </a>
-        <a href="index.php?page=<?php echo $pages = 3?>" class="min-w-9 rounded-md border border-slate-300 py-2 px-3 text-center text-sm transition-all shadow-sm hover:shadow-lg text-slate-600 hover:text-white hover:bg-slate-800 hover:border-slate-800 focus:text-white focus:bg-slate-800 focus:border-slate-800 active:border-slate-800 active:text-white active:bg-slate-800 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none ml-2">
-            3
-        </a>
-        <a href="index.php?page=<?php echo $next_page ?>" class="min-w-9 rounded-md border border-slate-300 py-2 px-3 text-center text-sm transition-all shadow-sm hover:shadow-lg text-slate-600 hover:text-white hover:bg-slate-800 hover:border-slate-800 focus:text-white focus:bg-slate-800 focus:border-slate-800 active:border-slate-800 active:text-white active:bg-slate-800 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none ml-2">
-            Next
-        </a>   
+        <?php 
+            $totalListOfStudent = (int)$getAllStudents[1][0][0];
+      
+                $totalField = $totalListOfStudent / 10;
+                $totalNumberOfPaginationBar = (int)$totalField;
+               
+                for($i = 1; $i <= $totalNumberOfPaginationBar; $i++){
+                    if($totalNumberOfPaginationBar >= 1){
+                        echo" <a href='index.php?page=".(int)$i."' class='min-w-9 rounded-md border border-slate-300 py-2 px-3 text-center text-sm transition-all shadow-sm hover:shadow-lg text-slate-600 hover:text-white hover:bg-slate-800 hover:border-slate-800 focus:text-white focus:bg-slate-800 focus:border-slate-800 active:border-slate-800 active:text-white active:bg-slate-800 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none ml-2'>
+                                ".$i."
+                            </a>";
+                    }
+                }
+         
+        ?>
     </div>
             
     </main>
